@@ -2,14 +2,18 @@ import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import React, { useContext } from "react";
 import { useChatContext } from "stream-chat-expo";
 import AuthContext from "../context/Authentication";
+import { useNavigation } from "@react-navigation/core";
 
 export default function UserList({ user }) {
   const { client } = useChatContext();
   const { userId } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   const createChannel = async () => {
     const channel = client.channel("messaging", { members: [user.id, userId] });
     channel.watch();
+
+    navigation.navigate("Channel", { channel });
   };
   return (
     <Pressable onPress={createChannel} style={styles.root}>

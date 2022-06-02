@@ -10,11 +10,10 @@ import { Channel as ChannelType } from "stream-chat";
 export default function ChannelListScreen({
   navigation,
 }: RootTabScreenProps<"TabOne">) {
-  const [channel, setChannel] = useState<ChannelType>();
+  // const [channel, setChannel] = useState<ChannelType>();
 
   const onChannelPressed = (channel) => {
     navigation.navigate("Channel", { channel });
-    console.log(channel, "channel");
   };
 
   return <ChannelList onSelect={onChannelPressed} />;
