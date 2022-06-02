@@ -13,16 +13,16 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
-import { Channel } from "stream-chat-expo";
+
 import Colors from "../constants/Colors";
 import AuthContext from "../context/Authentication";
 import useColorScheme from "../hooks/useColorScheme";
 import ChannelScreen from "../screens/ChannelScreen";
-import ModalScreen from "../screens/ModalScreen";
+
 import NotFoundScreen from "../screens/NotFoundScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import ChannelListScreen from "../screens/ChannelListScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import TabTwoScreen from "../screens/UserScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -74,9 +74,6 @@ function RootNavigator() {
             component={NotFoundScreen}
             options={{ title: "Oops!" }}
           />
-          <Stack.Group screenOptions={{ presentation: "modal" }}>
-            <Stack.Screen name="Modal" component={ModalScreen} />
-          </Stack.Group>
         </>
       )}
     </Stack.Navigator>
@@ -103,22 +100,9 @@ function BottomTabNavigator() {
         name="TabOne"
         component={ChannelListScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+          title: "Chat",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="comments-o" color={color} />
           ),
         })}
       />
@@ -126,8 +110,8 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Users",
+          tabBarIcon: ({ color }) => <TabBarIcon name="group" color={color} />,
         }}
       />
     </BottomTab.Navigator>
