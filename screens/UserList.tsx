@@ -15,6 +15,7 @@ export default function UserList({ user }) {
 
     navigation.navigate("Channel", { channel });
   };
+
   return (
     <Pressable onPress={createChannel} style={styles.root}>
       <Image source={{ uri: user.image }} style={styles.image} />
