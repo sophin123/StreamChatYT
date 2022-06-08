@@ -22,6 +22,10 @@ import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import { LogBox } from "react-native";
 
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
+
 LogBox.ignoreLogs(["exported from 'deprecated-react-native-prop-types'."]);
 
 const API_KEY = "udtj83g2nh2a";
@@ -35,19 +39,10 @@ export default function App() {
 
   // const [isReady, setIsReady] = useState(false);
   const [userId, setUserId] = useState("");
-  const [thread, setThread] = useState<MessageType | null>();
 
-  useEffect(() => {
-    return () => client.disconnectUser();
-  }, []);
-
-  const onBackPress = () => {
-    if (thread) {
-      setThread(undefined);
-    } else if (channel) {
-      setChannel(undefined);
-    }
-  };
+  // useEffect(() => {
+  //   return () => client.disconnectUser();
+  // }, [false]);
 
   if (!isLoadingComplete) {
     return null;

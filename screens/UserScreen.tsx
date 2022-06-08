@@ -23,7 +23,14 @@ export default function TabTwoScreen() {
   };
 
   useEffect(() => {
-    fetchUser();
+    let isMounted = true;
+
+    if (isMounted) {
+      fetchUser();
+    }
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (

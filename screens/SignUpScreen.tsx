@@ -28,14 +28,17 @@ export default function SignUpScreen() {
         },
         client.devToken(username)
       );
-      // const channel = client.channel("livestream", "ReactDev", {
-      //   name: "ReactDev",
-      // });
-      // await channel.create();
+      const channel = client.channel("livestream", "ReactDev", {
+        name: "ReactDev",
+      });
+      await channel.create();
       setUserId(username);
     } catch (e) {
       console.warn(e);
     }
+
+    console.log("User disconnected");
+    return () => client.disconnectUser();
   };
 
   const signUp = () => {
